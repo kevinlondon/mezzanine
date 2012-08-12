@@ -75,20 +75,18 @@ for more information on working with these:
 
 .. include:: fabfile.rst
 
-Multiplie Sites and Multi-Tenancy
+Multiple Sites and Multi-Tenancy
 =================================
 
-Mezzanine makes use of of Django's ``sites`` app to support multiple
+Mezzanine makes use of Django's ``sites`` app to support multiple
 sites in a single project. This functionality is always "turned on" in
 Mezzanine: a single ``Site`` record always exists, and is referenced
 when retrieving site related data, which most content in Mezzanine falls
 under.
 
-Where Mezzanine diverges from Django is how the ``Site`` record is
-retrieved. Typically a running instance of a Django project is bound
-to a single site defined by the ``SITE_ID`` setting, so while a project
-may contain support for multiple sites, a separate running instance of
-the project is required per site.
+Mezzanine differs from Django in how it retrieves the ``Site`` record.
+In Django, a site is defined by its ``SITE_ID`` setting, so each site requires
+a separate running instance of the project.
 
 Mezzanine uses a pipeline of checks to determine which site to
 reference when accessing content. The most import of these is one where
@@ -101,7 +99,7 @@ Here's the list of checks in the pipeline, in order:
 
   * The session variable ``site_id``. This allows a project to include
     features where a user's session is explicitly associated with a site.
-    Mezzanine uses this in it's admin to allow admin users to switch
+    Mezzanine uses this in its admin to allow admin users to switch
     between sites to manage, while accessing the admin on a single domain.
   * The domain matching the host of the current request, as described
     above.
@@ -110,20 +108,20 @@ Here's the list of checks in the pipeline, in order:
     request, such as management commands. Mezzanine includes a custom
     ``manage.py`` which will check for (and remove) a ``--site=ID``
     argument.
-  * Finally Mezzanine will fall back to the ``SITE_ID`` setting if none
+  * Finally, Mezzanine will fall back to the ``SITE_ID`` setting if none
     of the above checks can occur.
 
 Twitter Feeds
 =============
 
 If Twitter feeds are implemented in your templates, a cron job is
-required that will run the following management command. For example
+required that will run the following management command. For example,
 if we want the tweets to be updated every 10 minutes::
 
     */10 * * * * python path/to/your/site/manage.py poll_twitter
 
 This ensures that the data is always available in the site's database
 when accessed, and allows you to control how often the Twitter API is
-queried. Note that the fabric script described earlier includes
-features for deploying templates for cron jobs, which includes the
-job for polling twitter by default.
+queried. Note that the Fabric script described earlier includes
+features for deploying cron job templates, which include the
+job for polling Twitter by default.

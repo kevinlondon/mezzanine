@@ -123,5 +123,9 @@ if we want the tweets to be updated every 10 minutes::
 This ensures that the data is always available in the site's database
 when accessed, and allows you to control how often the Twitter API is
 queried. Note that the Fabric script described earlier includes
+<<<<<<< HEAD
 features for deploying cron job templates, which include the
+=======
+features for deploying templates for cron jobs, which includes the
+>>>>>>> 06d0a156188df28e590be3fb9b0500f7c5a5d81b
 job for polling Twitter by default.
